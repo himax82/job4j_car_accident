@@ -17,17 +17,17 @@ public class AccidentMem {
     }
 
     public void init() {
-        accidents.put(1, new Accident(1,
+        accidents.put(1, new Accident(
                         "Превышение скорости",
                         "17.08.2021 в 12:15 Водитель автомобиля Лада Гранта г/н А 564 КВ превысил установленную сткороть",
                         "г. Казань, просект Ленина"
                 ));
-        accidents.put(2, new Accident(2,
+        accidents.put(2, new Accident(
                         "Столконовение двух а/с без пострадавших ",
                         "19.08.2021 в 18:40 Автомобиль Тойота Камри г/н Х 532 УЕ не пропустил на перекресте а/м УАЗ Патриот г/н О 123 ИМ.",
                         "перекресток улиц Гагарина и Куйбышева"
                 ));
-        accidents.put(3, new Accident(3,
+        accidents.put(3, new Accident(
                         "Наезд на препятствие",
                         "21.08.2021 в 21 ч 18 м автомобиль Субару Форестер г/н А 245 ВР совершил столкновение с препядствием" +
                                 "(опора электропередач)",
@@ -36,7 +36,9 @@ public class AccidentMem {
     }
 
     public void save(Accident accident) {
-        accidents.put(accidents.size() + 1, accident);
+        int id = accidents.size() + 1;
+        accident.setId(id);
+        accidents.put(id, accident);
     }
 
 
