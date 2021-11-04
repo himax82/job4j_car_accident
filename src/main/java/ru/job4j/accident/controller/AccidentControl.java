@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AccidentControl {
     private final AccidentMem accidents;
@@ -20,11 +22,15 @@ public class AccidentControl {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("types", accidents.findAllType());
+        model.addAttribute("rules", accidents.findAllRule());
         return "accident/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+        for (String s : req.getParameterValues("rIds")) {
+          accident.addRule(accidents.findRuleById(Integer.parseInt(s)));
+        }
         accidents.save(accident);
         return "redirect:/";
     }
@@ -33,6 +39,7 @@ public class AccidentControl {
     public String edit(@RequestParam int id, Model model) {
         model.addAttribute("accident", accidents.findById(id));
         model.addAttribute("types", accidents.findAllType());
+        model.addAttribute("rules", accidents.findAllRule());
         return "accident/update";
     }
 }

@@ -52,6 +52,18 @@
                         <label>Адрес</label>
                         <input type="text" class="form-control" name="address" value="${accident.address}" required>
                     </div>
+                    <div class="form-group">
+                        <label>Статьи:</label>
+                        <select class="form-control" name="rIds" multiple>
+                            <c:forEach var="rule" items="${rules}" >
+                                <option value="${rule.id}"
+                                        <c:if test="${accident.rules.contains(rule)}">
+                                            ${"selected"}
+                                        </c:if>
+                                >${rule.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>

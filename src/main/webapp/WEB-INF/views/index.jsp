@@ -26,6 +26,7 @@
                         <th scope="col">Наименование</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Адрес</th>
+                        <th scope="col">Статьи</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,11 @@
                             <td><c:out value="${accident.name}"/></td>
                             <td><c:out value="${accident.text}"/></td>
                             <td><c:out value="${accident.address}"/></td>
+                            <td>
+                                <c:forEach items="${accident.rules}" var="rule">
+                                    <c:out value="${rule.name}; "/>
+                                </c:forEach>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
