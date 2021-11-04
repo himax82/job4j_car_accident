@@ -29,6 +29,14 @@
             <div class="card-body">
                 <form action="<c:url value='/save'/>" method='POST'>
                     <div class="form-group">
+                        <label>Тип:</label>
+                        <select class="custom-select input-sm" name="type.id">
+                            <c:forEach var="type" items="${types}" >
+                                <option value="${type.id}">${type.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Название</label>
                         <input type="text" class="form-control" name="name" required>
                     </div>

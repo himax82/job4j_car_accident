@@ -22,6 +22,7 @@
                 <table class="table">
                     <thead>
                     <tr><th scope="col"></th>
+                        <th scope="col">Тип происшествия</th>
                         <th scope="col">Наименование</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Адрес</th>
@@ -35,6 +36,7 @@
                                     <i class="fa fa-edit mr-3">Изменить</i>
                                 </a>
                             </td>
+                            <td><c:out value="${accident.type.name}"/></td>
                             <td><c:out value="${accident.name}"/></td>
                             <td><c:out value="${accident.text}"/></td>
                             <td><c:out value="${accident.address}"/></td>

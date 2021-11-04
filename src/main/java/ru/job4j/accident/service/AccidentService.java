@@ -22,4 +22,6 @@ public class AccidentService {
                 .sorted(Comparator.comparing(Accident::getId))
                 .collect(Collectors.toList());
     }
+
+
 }
