@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,39 +15,37 @@ import java.util.stream.Collectors;
 @Service
 public class AccidentService {
 
-    private final AccidentMem accidentMem;
+    private final AccidentJdbcTemplate accidentJdbcTemplate;
 
-    public AccidentService(AccidentMem accidentMem) {
-        this.accidentMem = accidentMem;
+    public AccidentService(AccidentJdbcTemplate accidentJdbcTemplate) {
+        this.accidentJdbcTemplate = accidentJdbcTemplate;
     }
 
     public void save(Accident accident, HttpServletRequest req) {
         for (String s : req.getParameterValues("rIds")) {
-            accident.addRule(accidentMem.findRuleById(Integer.parseInt(s)));
+            accident.addRule(accidentJdbcTemplate.findRulesById(Integer.parseInt(s)));
         }
-        accidentMem.save(accident);
+        accidentJdbcTemplate.saveAccident(accident);
     }
 
     public Collection<Accident> findAll() {
-        return accidentMem.findAll().stream()
-                .sorted(Comparator.comparing(Accident::getId))
-                .collect(Collectors.toList());
+        return accidentJdbcTemplate.findAll();
     }
 
     public Collection<AccidentType> findAllType() {
-        return accidentMem.findAllType();
+        return accidentJdbcTemplate.findAllType();
     }
 
     public Collection<Rule> findAllRule() {
-        return accidentMem.findAllRule();
+        return accidentJdbcTemplate.findAllRule();
     }
 
     public Accident findById(int id) {
-        return accidentMem.findById(id);
+        return accidentJdbcTemplate.findAccidentById(id);
     }
 
     public Rule findRuleById(int id) {
-        return accidentMem.findRuleById(id);
+        return accidentJdbcTemplate.findRulesById(id);
     }
 
 }
