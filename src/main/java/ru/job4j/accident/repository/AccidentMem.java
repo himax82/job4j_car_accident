@@ -67,9 +67,7 @@ public class AccidentMem {
     }
 
     public void save(Accident accident) {
-        int idType = accident.getType().getId();
-        String nameType = findTypeById(idType).getName();
-        accident.getType().setName(nameType);
+        accident.setType(findTypeById(accident.getType().getId()));
         if (accident.getId() != 0) {
             accidents.put(accident.getId(), accident);
             return;
