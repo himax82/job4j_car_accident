@@ -39,12 +39,19 @@ public class AccidentMem {
     }
 
     public void save(Accident accident) {
+        if (accident.getId() != 0) {
+            accidents.put(accident.getId(), accident);
+            return;
+        }
         accident.setId(integer.incrementAndGet());
         accidents.put(integer.get(), accident);
     }
 
-
     public Collection<Accident> findAll() {
         return accidents.values();
+    }
+
+    public Accident findById(int id) {
+        return accidents.get(id);
     }
 }
