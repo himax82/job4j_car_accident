@@ -4,48 +4,47 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.AccidentHibernate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 @Service
 public class AccidentService {
 
-    private final AccidentJdbcTemplate accidentJdbcTemplate;
+    private final AccidentHibernate accidentHibernate;
 
-    public AccidentService(AccidentJdbcTemplate accidentJdbcTemplate) {
-        this.accidentJdbcTemplate = accidentJdbcTemplate;
+    public AccidentService(AccidentHibernate accidentHibernate) {
+        this.accidentHibernate = accidentHibernate;
     }
 
     public void save(Accident accident, HttpServletRequest req) {
         for (String s : req.getParameterValues("rIds")) {
-            accident.addRule(accidentJdbcTemplate.findRulesById(Integer.parseInt(s)));
+            accident.addRule(accidentHibernate.findRuleById(Integer.parseInt(s)));
         }
-        accidentJdbcTemplate.saveAccident(accident);
+        System.out.println(accident);
+        accidentHibernate.save(accident);
+        System.out.println(accident);
     }
 
     public Collection<Accident> findAll() {
-        return accidentJdbcTemplate.findAll();
+        return accidentHibernate.findAll();
     }
 
     public Collection<AccidentType> findAllType() {
-        return accidentJdbcTemplate.findAllType();
+        return accidentHibernate.findAllTypes();
     }
 
     public Collection<Rule> findAllRule() {
-        return accidentJdbcTemplate.findAllRule();
+        return accidentHibernate.findAllRules();
     }
 
     public Accident findById(int id) {
-        return accidentJdbcTemplate.findAccidentById(id);
+        return accidentHibernate.findAccidentById(id);
     }
 
     public Rule findRuleById(int id) {
-        return accidentJdbcTemplate.findRulesById(id);
+        return accidentHibernate.findRuleById(id);
     }
 
 }

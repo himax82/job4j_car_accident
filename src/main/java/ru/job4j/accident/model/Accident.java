@@ -1,11 +1,16 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "accidents")
 public class Accident {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
@@ -14,8 +19,15 @@ public class Accident {
 
     private String address;
 
+    @ManyToOne
+    @JoinColumn(name = "accident_type_id")
     private AccidentType type;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "accidents_rules",
+            joinColumns = {@JoinColumn(name = "accident_id", updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "rule_id", updatable = false)})
     private Set<Rule> rules = new HashSet<>();
 
     public Accident() {
@@ -95,5 +107,16 @@ public class Accident {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Accident{" +
+                "name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                ", address='" + address + '\'' +
+                ", type=" + type +
+                ", rules=" + rules +
+                '}';
     }
 }
