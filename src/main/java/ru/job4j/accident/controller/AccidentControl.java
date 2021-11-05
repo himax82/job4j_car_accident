@@ -29,7 +29,8 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        accidents.save(accident, req);
+        String[] ids = req.getParameterValues("rIds");
+        accidents.save(accident, ids);
         return "redirect:/";
     }
 

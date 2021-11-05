@@ -18,13 +18,11 @@ public class AccidentService {
         this.accidentHibernate = accidentHibernate;
     }
 
-    public void save(Accident accident, HttpServletRequest req) {
-        for (String s : req.getParameterValues("rIds")) {
+    public void save(Accident accident, String[] ids) {
+        for (String s : ids) {
             accident.addRule(accidentHibernate.findRuleById(Integer.parseInt(s)));
         }
-        System.out.println(accident);
         accidentHibernate.save(accident);
-        System.out.println(accident);
     }
 
     public Collection<Accident> findAll() {

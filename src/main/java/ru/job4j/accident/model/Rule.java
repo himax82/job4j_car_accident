@@ -52,7 +52,8 @@ public class Rule {
     @Override
     public String toString() {
         return "Rule{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

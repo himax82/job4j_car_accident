@@ -26,18 +26,15 @@ public class AccidentHibernate {
         this.sf = sf;
     }
 
-    public Accident save(Accident accident) {
-        try (Session session = sf.openSession()) {
+    public void save(Accident accident) {
+        et(session -> {
             if (accident.getId() == 0) {
                 session.save(accident);
-            }
-            else {
+            } else {
                 session.update(accident);
             }
-        } catch (Exception e) {
-            LOG.error("Error save accident ");
-        }
-        return accident;
+            return true;
+        });
     }
 
     public List<Accident> findAll() {
