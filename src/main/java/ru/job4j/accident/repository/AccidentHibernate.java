@@ -25,9 +25,12 @@ public class AccidentHibernate {
         this.sf = sf;
     }
 
-    public void save(Accident accident) {
+    public void save(Accident accident, String[] ids) {
         et(session -> {
             if (accident.getId() == 0) {
+                for (String s : ids) {
+                    accident.addRule(findRuleById(Integer.parseInt(s)));
+                }
                 session.save(accident);
             } else {
                 session.update(accident);
