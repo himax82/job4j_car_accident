@@ -15,10 +15,11 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Нарушения ПДД
+                Нарушения ПДД Пользователь : ${user.username}
             </div>
             <div class="card-body">
                 <a href="<c:url value='/create'/>">Добавить инцидент</a>
+
                 <table class="table">
                     <thead>
                     <tr><th scope="col"></th>
