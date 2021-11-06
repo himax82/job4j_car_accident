@@ -8,6 +8,7 @@
     </div>
 </c:if>
 <form name='login' action="<c:url value='/login'/>" method='POST'>
+    <a href="<c:url value='/reg'/>">Регистрация</a>
     <table>
         <tr>
             <td>UserName:</td>
@@ -23,5 +24,6 @@
     </table>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
+
 </body>
 </html>
