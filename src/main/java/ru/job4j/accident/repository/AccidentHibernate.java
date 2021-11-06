@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-@Repository
 public class AccidentHibernate {
 
     private static final Logger LOG = LoggerFactory.getLogger(AccidentHibernate.class.getName());
