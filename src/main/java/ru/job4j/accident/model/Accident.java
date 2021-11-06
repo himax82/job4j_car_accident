@@ -31,7 +31,7 @@ public class Accident {
             name = "accidents_rules",
             joinColumns = {@JoinColumn(name = "accident_id", updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "rule_id", updatable = false)})
-    private List<Rule> rules = new ArrayList<>();
+    private Set<Rule> rules = new HashSet<>();
 
     public Accident() {
     }
@@ -83,11 +83,11 @@ public class Accident {
         this.type = type;
     }
 
-    public List<Rule> getRules() {
+    public Set<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(List<Rule> rules) {
+    public void setRules(Set<Rule> rules) {
         this.rules = rules;
     }
 
